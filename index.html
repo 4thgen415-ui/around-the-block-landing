@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Around The Block Explorer — Explore the Nearest Star Systems</title>
+  <meta name="description" content="A real 3D star-system explorer for iOS. Visit 10 neighboring star systems, stand on alien worlds, watch eclipses, and see the sky from another sun. One price. No ads. No subscriptions." />
+  <link rel="icon" type="image/png" href="/manus-storage/atb-app-icon_5587d494.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-void: #000000;
+      --bg-deep: #060810;
+      --bg-panel: #0c1018;
+      --text-primary: #f0f2f5;
+      --text-secondary: #a0aab8;
+      --text-dim: #6b7a8d;
+      --accent-teal: #3FE0D8;
+      --accent-amber: #ffe0a3;
+      --accent-red: #ff8a4a;
+      --border-dim: rgba(63, 224, 216, 0.12);
+      --border-bright: rgba(63, 224, 216, 0.3);
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-display);
+      background: var(--bg-void);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-dim);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+
+    .nav-brand img {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+    }
+
+    .nav-brand span {
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-teal);
+    }
+
+    .btn-appstore {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.25rem;
+      background: var(--text-primary);
+      color: var(--bg-void);
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: transform 0.15s ease-out, opacity 0.15s;
+    }
+
+    .btn-appstore:hover {
+      transform: scale(1.03);
+    }
+
+    .btn-appstore:active {
+      transform: scale(0.97);
+    }
+
+    .btn-appstore svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('/manus-storage/atb-hero-galaxy_56a88256.png') center/cover no-repeat;
+      opacity: 0.55;
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 30%, var(--bg-void) 80%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 1rem;
+      border: 1px solid var(--border-bright);
+      border-radius: 100px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent-teal);
+      margin-bottom: 2rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 .accent {
+      color: var(--accent-teal);
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.9rem 2rem;
+      background: var(--accent-teal);
+      color: var(--bg-void);
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: transform 0.15s ease-out, box-shadow 0.2s;
+      box-shadow: 0 0 30px rgba(63, 224, 216, 0.2);
+    }
+
+    .btn-primary:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 50px rgba(63, 224, 216, 0.35);
+    }
+
+    .btn-primary:active {
+      transform: scale(0.97);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.9rem 2rem;
+      background: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--border-bright);
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: transform 0.15s ease-out, border-color 0.2s;
+    }
+
+    .btn-secondary:hover {
+      transform: scale(1.03);
+      border-color: var(--accent-teal);
+    }
+
+    /* ===== STATS ===== */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border-dim);
+      border: 1px solid var(--border-dim);
+      max-width: 900px;
+      margin: -3rem auto 0;
+      position: relative;
+      z-index: 3;
+    }
+
+    .stat-item {
+      background: var(--bg-deep);
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent-teal);
+      font-family: var(--font-mono);
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      margin-top: 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ===== SECTIONS ===== */
+    section {
+      padding: 6rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent-teal);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .section-desc {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 650px;
+      margin-bottom: 3rem;
+      line-height: 1.7;
+    }
+
+    /* ===== FEATURES GRID ===== */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1px;
+      background: var(--border-dim);
+      border: 1px solid var(--border-dim);
+    }
+
+    .feature-card {
+      background: var(--bg-deep);
+      padding: 2.5rem;
+      transition: background 0.2s;
+    }
+
+    .feature-card:hover {
+      background: var(--bg-panel);
+    }
+
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 1.25rem;
+      color: var(--accent-teal);
+    }
+
+    .feature-card h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+
+    .feature-card p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ===== SHOWCASE ===== */
+    .showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      padding: 6rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .showcase-reversed {
+      direction: rtl;
+    }
+
+    .showcase-reversed > * {
+      direction: ltr;
+    }
+
+    .showcase-image {
+      width: 100%;
+      border-radius: 4px;
+      border: 1px solid var(--border-dim);
+    }
+
+    .showcase-text h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .showcase-text p {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .showcase-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .showcase-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+
+    .showcase-list li::before {
+      content: '›';
+      color: var(--accent-teal);
+      font-weight: 700;
+      font-size: 1.2rem;
+      line-height: 1.4;
+    }
+
+    /* ===== SYSTEMS ===== */
+    .systems-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1px;
+      background: var(--border-dim);
+      border: 1px solid var(--border-dim);
+    }
+
+    .system-card {
+      background: var(--bg-deep);
+      padding: 2rem;
+      transition: background 0.2s;
+    }
+
+    .system-card:hover {
+      background: var(--bg-panel);
+    }
+
+    .system-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .system-distance {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent-teal);
+      margin-bottom: 0.75rem;
+    }
+
+    .system-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ===== PRICING ===== */
+    .pricing-card {
+      max-width: 500px;
+      margin: 0 auto;
+      background: var(--bg-deep);
+      border: 1px solid var(--border-bright);
+      padding: 3rem;
+      text-align: center;
+    }
+
+    .pricing-card h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .pricing-card .price-tagline {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .pricing-features {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .pricing-features li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+
+    .pricing-features li .check {
+      color: var(--accent-teal);
+      font-weight: 700;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      border-top: 1px solid var(--border-dim);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-brand img {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+    }
+
+    .footer-brand span {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-teal);
+    }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      nav {
+        padding: 0.75rem 1rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+        margin-top: -2rem;
+      }
+
+      .showcase {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 4rem 1.5rem;
+      }
+
+      .showcase-reversed {
+        direction: ltr;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .systems-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 5rem 1.5rem 3rem;
+      }
+
+      section {
+        padding: 4rem 1.5rem;
+      }
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @media (prefers-reduced-motion: no-preference) {
+      .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeUp 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+      }
+
+      @keyframes fadeUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero-content { animation-delay: 0.1s; }
+      .stats { animation-delay: 0.3s; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-brand">
+      <img src="/manus-storage/atb-app-icon_5587d494.png" alt="Around The Block Explorer" />
+      <span>Around The Block Explorer</span>
+    </a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#systems">Systems</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#" class="btn-appstore" id="appstore-link">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        App Store
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content fade-in">
+      <div class="hero-badge">◆ iOS App — Explore the Nearest Stars</div>
+      <h1>Stand on worlds orbiting <span class="accent">other suns</span></h1>
+      <p class="hero-subtitle">
+        A real 3D star-system explorer. Visit our Sun and the ten nearest neighboring systems, see spacetime bend around stars, watch the sky from alien surfaces, and travel between worlds at warp speed.
+      </p>
+      <div class="hero-cta">
+        <a href="#" class="btn-primary" id="hero-appstore">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          Coming Soon on the App Store
+        </a>
+        <a href="#features" class="btn-secondary">Explore Features</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats fade-in">
+    <div class="stat-item">
+      <div class="stat-number">11</div>
+      <div class="stat-label">Star Systems</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">41,487</div>
+      <div class="stat-label">Real Stars in the Sky</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">10+</div>
+      <div class="stat-label">Exoplanets to Visit</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">0</div>
+      <div class="stat-label">Ads or Subscriptions</div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <div class="section-label">// capabilities</div>
+    <h2 class="section-title">Built on real astrophysics</h2>
+    <p class="section-desc">
+      Every orbit, every star color, every sky is computed from published scientific data — NASA Exoplanet Archive, SIMBAD, and the HYG 41,487-star catalog.
+    </p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+        <h3>Interactive 3D Galaxy Map</h3>
+        <p>Orbit, zoom, and pan through a real-scale map of the nearest star systems. Each star's position, color, and size are derived from astronomical catalogs.</p>
+      </div>
+      <div class="feature-card">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3v18M3 12h18M5.636 5.636l12.728 12.728M18.364 5.636L5.636 18.364"/><circle cx="12" cy="12" r="3"/></svg>
+        <h3>Spacetime Curvature Grid</h3>
+        <p>Watch spacetime bend in real time. A geodesic grid warps around each star and planet based on actual mass data, visualizing general relativity.</p>
+      </div>
+      <div class="feature-card">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <h3>First-Person Alien Skies</h3>
+        <p>Stand on the surface of exoplanets and see the sky as it would actually appear — with the correct suns, constellations, and Milky Way from that vantage point.</p>
+      </div>
+      <div class="feature-card">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        <h3>Warp Travel Between Systems</h3>
+        <p>Travel between star systems with a cinematic warp effect — star streaks accelerate into a light tunnel, flash at peak velocity, then decelerate as the destination fades in.</p>
+      </div>
+      <div class="feature-card">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <h3>Time Control</h3>
+        <p>Scrub forward and backward through simulated time. Watch orbits evolve, see planets move, and trigger rare events like the T Coronae Borealis nova — all at your own pace.</p>
+      </div>
+      <div class="feature-card">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        <h3>Original Soundtrack</h3>
+        <p>10 ambient tracks composed for the app. Each star system zone plays its own randomized soundtrack that loops seamlessly as you explore.</p>
+      </div>
+      <div class="feature-card">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        <h3>Sky Postcards</h3>
+        <p>Capture and share screenshots of alien skies as postcards. Save them to your photo library or share directly with friends.</p>
+      </div>
+      <div class="feature-card">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        <h3>5,500+ Exoplanet Catalog</h3>
+        <p>Browse and search over 5,500 confirmed exoplanets from the NASA archive. Filter by habitable zone, view host star data, and visit any world's sky.</p>
+      </div>
+      <div class="feature-card">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 12l2 2 4-4"/></svg>
+        <h3>Eclipse Chasers</h3>
+        <p>Every total and hybrid solar eclipse from 2026 to 2051, with real path maps, verified city times, safe-viewing gear guides, and reminder notifications.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOWCASE: SURFACE -->
+  <div class="showcase">
+    <div>
+      <img src="/manus-storage/atb-surface-sky_25bf4d0c.png" alt="First-person view from an exoplanet surface" class="showcase-image" />
+    </div>
+    <div class="showcase-text">
+      <h2>See the sky from another world</h2>
+      <p>
+        The surface view places you on the ground of any celestial body in the catalog. The sky above is computed in real time from the 41,487-star HYG catalog, repositioned to that world's coordinates.
+      </p>
+      <ul class="showcase-list">
+        <li>Accurate day/night cycle with atmospheric scattering</li>
+        <li>Pinch to zoom — from wide-angle to telescopic field of view</li>
+        <li>Drag to look around the full 360° sky</li>
+        <li>Time scrubbing shows how the sky changes over months and years</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SHOWCASE: SPACETIME -->
+  <div class="showcase showcase-reversed">
+    <div>
+      <img src="/manus-storage/atb-spacetime-grid_cfede4c2.png" alt="Spacetime curvature visualization" class="showcase-image" />
+    </div>
+    <div class="showcase-text">
+      <h2>Geodesics you can see</h2>
+      <p>
+        A real-time spacetime grid bends around every massive body in the system. The curvature depth is computed from actual stellar and planetary masses — heavier objects create deeper wells.
+      </p>
+      <ul class="showcase-list">
+        <li>Up to 16 simultaneous gravity wells rendered per system</li>
+        <li>Heat-mapped grid lines show curvature intensity</li>
+        <li>Toggle on/off from the display settings panel</li>
+        <li>Educational visualization of general relativity</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SHOWCASE: WARP -->
+  <div class="showcase">
+    <div>
+      <img src="/manus-storage/atb-warp-effect_fc16818b.png" alt="Warp speed travel effect" class="showcase-image" />
+    </div>
+    <div class="showcase-text">
+      <h2>Travel at warp speed</h2>
+      <p>
+        Tap any star on the galaxy map to initiate warp travel. 520 individual star streaks accelerate, cruise, and decelerate in a physically-inspired 1.75-second sequence.
+      </p>
+      <ul class="showcase-list">
+        <li>Three-phase animation: acceleration, cruise, deceleration</li>
+        <li>Blue-white starlight palette with violet and warm strays</li>
+        <li>Haptic feedback synced to the warp sequence</li>
+        <li>Destination system fades in as you arrive</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SYSTEMS -->
+  <section id="systems">
+    <div class="section-label">// catalog</div>
+    <h2 class="section-title">The neighborhood</h2>
+    <p class="section-desc">
+      Our Sun plus the ten nearest star systems — every one modeled from published astrophysical data.
+    </p>
+    <div class="systems-grid">
+      <div class="system-card">
+        <div class="system-name">The Sun (Sol)</div>
+        <div class="system-distance">0 ly — Home</div>
+        <div class="system-desc">Our own star and its eight planets. The starting point for every journey.</div>
+      </div>
+      <div class="system-card">
+        <div class="system-name">Alpha Centauri</div>
+        <div class="system-distance">4.37 ly</div>
+        <div class="system-desc">Triple star system. Proxima b orbits within its star's habitable zone. A and B orbit each other every 80 years.</div>
+      </div>
+      <div class="system-card">
+        <div class="system-name">Barnard's Star</div>
+        <div class="system-distance">5.96 ly</div>
+        <div class="system-desc">The fastest-moving star in our sky, now known to host four tiny rocky worlds confirmed in 2024–2025.</div>
+      </div>
+      <div class="system-card">
+        <div class="system-name">Luhman 16</div>
+        <div class="system-distance">6.5 ly</div>
+        <div class="system-desc">Binary brown dwarfs — failed stars too small to sustain fusion, orbiting each other in the dark.</div>
+      </div>
+      <div class="system-card">
+        <div class="system-name">WISE 0855−0714</div>
+        <div class="system-distance">7.43 ly</div>
+        <div class="system-desc">A cold sub-brown dwarf, barely warmer than Jupiter. One of the coldest objects ever found outside our solar system.</div>
+      </div>
+      <div class="system-card">
+        <div class="system-name">Wolf 359</div>
+        <div class="system-distance">7.86 ly</div>
+        <div class="system-desc">A faint red dwarf, one of the nearest stars to Earth. Famous in science fiction, now explorable in 3D.</div>
+      </div>
+      <div class="system-card">
+        <div class="system-name">Lalande 21185</div>
+        <div class="system-distance">8.31 ly</div>
+        <div class="system-desc">A red dwarf with confirmed planetary companions. One of the brightest red dwarfs in our sky.</div>
+      </div>
+      <div class="system-card">
+        <div class="system-name">Sirius</div>
+        <div class="system-distance">8.6 ly</div>
+        <div class="system-desc">The brightest star in Earth's night sky. A binary system — the brilliant Sirius A paired with the white dwarf Sirius B.</div>
+      </div>
+      <div class="system-card">
+        <div class="system-name">Luyten 726-8</div>
+        <div class="system-distance">8.73 ly</div>
+        <div class="system-desc">A binary red dwarf system. UV Ceti (component B) is the prototype flare star — prone to dramatic brightness eruptions.</div>
+      </div>
+      <div class="system-card">
+        <div class="system-name">Ross 154</div>
+        <div class="system-distance">9.7 ly</div>
+        <div class="system-desc">A nearby red dwarf in Sagittarius. An active flare star, relatively young at roughly one billion years old.</div>
+      </div>
+      <div class="system-card">
+        <div class="system-name">Ross 248</div>
+        <div class="system-distance">10.3 ly</div>
+        <div class="system-desc">In about 36,000 years, Ross 248 will briefly become the closest star to our Sun as it passes within 3.0 light-years.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="section-label">// one price</div>
+    <h2 class="section-title">Own the whole universe</h2>
+    <p class="section-desc">
+      One purchase. No subscription. No ads. No tracking. Every star, every world, every sky — done beautifully, everywhere, with nothing to unlock.
+    </p>
+    <div class="pricing-card">
+      <h3>Around The Block Explorer</h3>
+      <p class="price-tagline">One-time purchase on the App Store</p>
+      <ul class="pricing-features">
+        <li><span class="check">✓</span> All 11 star systems and their worlds</li>
+        <li><span class="check">✓</span> 41,487-star real sky from any surface</li>
+        <li><span class="check">✓</span> Spacetime curvature visualization</li>
+        <li><span class="check">✓</span> Warp travel between systems</li>
+        <li><span class="check">✓</span> 5,500+ exoplanet catalog</li>
+        <li><span class="check">✓</span> Eclipse chaser with reminders</li>
+        <li><span class="check">✓</span> Original 10-track soundtrack</li>
+        <li><span class="check">✓</span> Sky postcards and sharing</li>
+        <li><span class="check">✓</span> Free data updates as new worlds are confirmed</li>
+        <li><span class="check">✓</span> No ads. No subscriptions. No tracking. Ever.</li>
+      </ul>
+      <a href="#" class="btn-primary" id="pricing-appstore">Coming Soon on the App Store</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">
+      <img src="/manus-storage/atb-app-icon_5587d494.png" alt="Around The Block Explorer" />
+      <span>Around The Block Explorer</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://4thgen415-ui.github.io/around-the-block-legal/privacy.html">Privacy Policy</a>
+      <a href="https://4thgen415-ui.github.io/around-the-block-legal/terms.html">Terms of Service</a>
+      <a href="mailto:support@aroundtheblock.space">Contact</a>
+    </div>
+    <p class="footer-copy">© 2026 appenstance, LLC. All rights reserved. Data from NASA, SIMBAD, and HYG v4.1.</p>
+  </footer>
+
+  <script>
+    // Intersection Observer for fade-in animations
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.feature-card, .system-card, .showcase, .pricing-card').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1), transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
+        observer.observe(el);
+      });
+    }
+
+    // Placeholder for App Store link
+    document.querySelectorAll('#appstore-link, #hero-appstore, #pricing-appstore').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        alert('App Store link will be available once the app is published.');
+      });
+    });
+  </script>
+</body>
+</html>
