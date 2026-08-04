@@ -86,42 +86,19 @@
 
     /* GLOBE LOGO */
     .hero-globe {
-      width: 180px;
-      height: 180px;
+      width: 160px;
+      height: 160px;
       margin: 0 auto 2.5rem;
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: radial-gradient(circle at 35% 35%, rgba(63,224,216,0.15), transparent 60%),
-                  radial-gradient(circle at 65% 65%, rgba(255,224,163,0.08), transparent 50%);
-      box-shadow: 0 0 60px rgba(63,224,216,0.2), 0 0 120px rgba(63,224,216,0.05), inset 0 0 40px rgba(63,224,216,0.05);
-      border: 1.5px solid var(--border-bright);
-      position: relative;
-      animation: float 6s ease-in-out infinite;
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
+      overflow: hidden;
+      border: 2px solid rgba(100, 100, 140, 0.4);
     }
     .hero-globe img {
-      width: 110px;
-      height: 110px;
-      border-radius: 18px;
-    }
-    .hero-globe::before {
-      content: '';
-      position: absolute;
-      inset: -8px;
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
-      border: 1px solid rgba(63,224,216,0.08);
-    }
-    .hero-globe::after {
-      content: '';
-      position: absolute;
-      inset: -16px;
-      border-radius: 50%;
-      border: 1px solid rgba(63,224,216,0.04);
+      object-fit: cover;
+      display: block;
     }
     .hero h1 {
       font-size: clamp(2.2rem, 5vw, 3.5rem);
