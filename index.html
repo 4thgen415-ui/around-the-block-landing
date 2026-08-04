@@ -92,6 +92,16 @@
       border-radius: 50%;
       overflow: hidden;
       border: none;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6), inset 0 -4px 12px rgba(0,0,0,0.3);
+      position: relative;
+    }
+    .hero-globe::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 25%, rgba(255,255,255,0.15), transparent 50%);
+      pointer-events: none;
     }
     .hero-globe img {
       width: 100%;
