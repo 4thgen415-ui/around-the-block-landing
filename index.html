@@ -34,6 +34,7 @@
       line-height: 1.6;
       overflow-x: hidden;
     }
+
     /* NAV */
     nav {
       position: fixed;
@@ -53,427 +54,360 @@
       gap: 0.75rem;
       text-decoration: none;
       color: var(--text-primary);
-      font-weight: 600;
-      font-size: 1rem;
     }
-    .nav-brand img { width: 36px; height: 36px; border-radius: 8px; }
-    .nav-links { display: flex; align-items: center; gap: 2rem; }
+    .nav-brand img { width: 32px; height: 32px; border-radius: 6px; }
+    .nav-brand span { font-weight: 600; font-size: 1rem; }
+    .nav-links { display: flex; gap: 2rem; }
     .nav-links a {
       color: var(--text-secondary);
       text-decoration: none;
-      font-size: 0.875rem;
-      font-weight: 500;
+      font-size: 0.9rem;
       transition: color 0.2s;
     }
-    .nav-links a:hover { color: var(--text-primary); }
-    .btn-appstore {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1rem;
-      background: var(--text-primary);
-      color: var(--bg-void);
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 0.8rem;
-      text-decoration: none;
-      transition: transform 0.16s cubic-bezier(0.23, 1, 0.32, 1);
-    }
-    .btn-appstore:active { transform: scale(0.97); }
-    .btn-appstore svg { width: 16px; height: 16px; }
+    .nav-links a:hover { color: var(--accent-teal); }
+
     /* HERO */
     .hero {
-      position: relative;
       min-height: 100vh;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 8rem 2rem 4rem;
       text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
     }
     .hero-bg {
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at 50% 30%, rgba(63, 224, 216, 0.06) 0%, transparent 60%),
-                  radial-gradient(ellipse at 80% 70%, rgba(63, 224, 216, 0.03) 0%, transparent 40%);
+      background: radial-gradient(ellipse at 50% 40%, rgba(63,224,216,0.06) 0%, transparent 60%);
     }
-    .hero-content {
-      position: relative;
-      max-width: 800px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+    .hero-content { position: relative; z-index: 2; max-width: 720px; }
+
     /* GLOBE LOGO */
     .hero-globe {
-      width: 140px;
-      height: 140px;
+      width: 160px;
+      height: 160px;
+      margin: 0 auto 2rem;
       border-radius: 50%;
-      border: 2px solid var(--border-bright);
-      box-shadow: 0 0 40px rgba(63, 224, 216, 0.15), 0 0 80px rgba(63, 224, 216, 0.05), inset 0 0 30px rgba(63, 224, 216, 0.08);
-      margin-bottom: 2rem;
-      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 35% 35%, rgba(63,224,216,0.15), transparent 60%),
+                  radial-gradient(circle at 65% 65%, rgba(255,224,163,0.08), transparent 50%);
+      box-shadow: 0 0 60px rgba(63,224,216,0.2), 0 0 120px rgba(63,224,216,0.05), inset 0 0 40px rgba(63,224,216,0.05);
+      border: 1.5px solid var(--border-bright);
       position: relative;
-      background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.08) 0%, transparent 60%);
     }
     .hero-globe img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      border-radius: 16px;
     }
     .hero-globe::after {
       content: '';
       position: absolute;
-      inset: 0;
+      inset: -4px;
       border-radius: 50%;
-      background: radial-gradient(circle at 30% 25%, rgba(255,255,255,0.12) 0%, transparent 50%);
-      pointer-events: none;
+      border: 1px solid rgba(63,224,216,0.1);
     }
+
     .hero-badge {
       display: inline-block;
-      padding: 0.4rem 1rem;
-      border: 1px solid var(--border-bright);
+      padding: 0.35rem 1rem;
+      background: rgba(63,224,216,0.08);
+      border: 1px solid var(--border-dim);
       border-radius: 100px;
       font-size: 0.8rem;
-      font-family: var(--font-mono);
       color: var(--accent-teal);
-      margin-bottom: 2rem;
+      font-family: var(--font-mono);
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.05em;
     }
     .hero h1 {
-      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
       font-weight: 700;
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
     }
-    .accent { color: var(--accent-teal); }
+    .hero h1 .accent { color: var(--accent-teal); }
     .hero-subtitle {
       font-size: 1.15rem;
       color: var(--text-secondary);
-      max-width: 640px;
+      max-width: 560px;
       margin: 0 auto 2.5rem;
       line-height: 1.7;
     }
-    .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
     .btn-primary {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.85rem 1.75rem;
+      padding: 0.9rem 2rem;
       background: var(--accent-teal);
-      color: var(--bg-void);
-      border-radius: 10px;
+      color: #000;
       font-weight: 600;
-      font-size: 0.95rem;
+      border-radius: 10px;
       text-decoration: none;
-      transition: transform 0.16s cubic-bezier(0.23, 1, 0.32, 1);
+      font-size: 1rem;
+      transition: transform 0.15s, box-shadow 0.15s;
     }
-    .btn-primary:active { transform: scale(0.97); }
-    .btn-primary svg { width: 20px; height: 20px; }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(63,224,216,0.3);
+    }
     .btn-secondary {
       display: inline-flex;
       align-items: center;
-      padding: 0.85rem 1.75rem;
-      border: 1px solid var(--border-bright);
+      gap: 0.5rem;
+      padding: 0.9rem 2rem;
+      background: transparent;
       color: var(--text-primary);
-      border-radius: 10px;
       font-weight: 500;
-      font-size: 0.95rem;
+      border-radius: 10px;
       text-decoration: none;
-      transition: background 0.2s, transform 0.16s cubic-bezier(0.23, 1, 0.32, 1);
+      font-size: 1rem;
+      border: 1px solid var(--border-bright);
+      transition: background 0.2s;
     }
-    .btn-secondary:hover { background: rgba(63, 224, 216, 0.06); }
-    .btn-secondary:active { transform: scale(0.97); }
-    /* STATS */
-    .stats {
-      display: flex;
-      justify-content: center;
-      gap: 3rem;
-      padding: 3rem 2rem;
-      border-top: 1px solid var(--border-dim);
-      border-bottom: 1px solid var(--border-dim);
-      flex-wrap: wrap;
-    }
-    .stat-item { text-align: center; }
-    .stat-number {
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: var(--accent-teal);
-      font-family: var(--font-mono);
-    }
-    .stat-label {
-      font-size: 0.8rem;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-top: 0.25rem;
-    }
-    /* SECTIONS */
-    section {
-      padding: 6rem 2rem;
+    .btn-secondary:hover { background: rgba(63,224,216,0.05); }
+
+    /* PHONE SHOWCASE */
+    .showcase {
+      padding: 4rem 2rem;
       max-width: 1200px;
       margin: 0 auto;
     }
-    .section-label {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--accent-teal);
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      margin-bottom: 1rem;
-    }
-    .section-title {
-      font-size: clamp(1.75rem, 4vw, 2.5rem);
-      font-weight: 700;
-      margin-bottom: 1rem;
-      letter-spacing: -0.01em;
-    }
-    .section-desc {
-      font-size: 1.05rem;
-      color: var(--text-secondary);
-      max-width: 640px;
-      margin-bottom: 3rem;
-      line-height: 1.7;
-    }
-    /* SCREENSHOT GALLERY */
-    .screenshot-gallery {
+    .showcase-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.25rem;
-      max-width: 1200px;
-      margin: 4rem auto;
-      padding: 0 2rem;
-    }
-    .screenshot-item {
-      position: relative;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid var(--border-dim);
-      transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.3s;
-      aspect-ratio: 9/19.5;
-    }
-    .screenshot-item:hover {
-      transform: translateY(-4px) scale(1.02);
-      border-color: var(--border-bright);
-    }
-    .screenshot-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .screenshot-caption {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 1.5rem 1rem 1rem;
-      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
-      font-size: 0.75rem;
-      color: var(--text-secondary);
-      font-family: var(--font-mono);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-    /* FEATURES */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 1.5rem;
+      justify-items: center;
     }
-    .feature-card {
-      padding: 2rem;
-      border: 1px solid var(--border-dim);
-      border-radius: 12px;
-      background: var(--bg-panel);
-      transition: border-color 0.3s, transform 0.2s;
-    }
-    .feature-card:hover {
-      border-color: var(--border-bright);
-      transform: translateY(-2px);
-    }
-    .feature-icon {
-      width: 32px;
-      height: 32px;
-      color: var(--accent-teal);
-      margin-bottom: 1rem;
-    }
-    .feature-card h3 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-    }
-    .feature-card p {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-    /* SHOWCASE */
-    .showcase {
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 3rem;
-      align-items: center;
-      max-width: 1100px;
-      margin: 5rem auto;
-      padding: 0 2rem;
-    }
-    .showcase-reversed { grid-template-columns: 1fr 280px; }
-    .showcase-reversed .showcase-phone { order: 2; }
-    .showcase-reversed .showcase-text { order: 1; }
-    .showcase-phone {
+    .phone-frame {
+      width: 220px;
       border-radius: 24px;
       overflow: hidden;
       border: 2px solid var(--border-dim);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-      aspect-ratio: 9/19.5;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      transition: transform 0.3s, box-shadow 0.3s;
     }
-    .showcase-phone img {
+    .phone-frame:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 30px 80px rgba(63,224,216,0.15);
+    }
+    .phone-frame img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
+      display: block;
     }
-    .showcase-text h2 {
-      font-size: 1.5rem;
+
+    /* SECTION HEADERS */
+    .section-header {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 3rem;
+    }
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent-teal);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .section-header h2 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
       font-weight: 700;
       margin-bottom: 1rem;
     }
-    .showcase-text p {
+    .section-header p {
       color: var(--text-secondary);
-      font-size: 0.95rem;
-      line-height: 1.7;
-      margin-bottom: 1.25rem;
+      font-size: 1.05rem;
     }
-    .showcase-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
+
+    /* FEATURES */
+    .features {
+      padding: 6rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
     }
-    .showcase-list li {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      padding-left: 1.25rem;
-      position: relative;
-    }
-    .showcase-list li::before {
-      content: '\2192';
-      position: absolute;
-      left: 0;
-      color: var(--accent-teal);
-    }
-    /* SYSTEMS */
-    .systems-grid {
+    .feature-row {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      margin-bottom: 6rem;
+    }
+    .feature-row.reverse { direction: rtl; }
+    .feature-row.reverse > * { direction: ltr; }
+    .feature-text h3 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .feature-text p {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+    .feature-phone {
+      display: flex;
+      justify-content: center;
+    }
+    .feature-phone .phone-frame {
+      width: 260px;
+    }
+
+    /* STAR SYSTEMS */
+    .systems {
+      padding: 6rem 2rem;
+      background: var(--bg-deep);
+    }
+    .systems-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       gap: 1rem;
     }
     .system-card {
-      padding: 1.25rem 1.5rem;
-      border: 1px solid var(--border-dim);
-      border-radius: 10px;
+      padding: 1.25rem;
       background: var(--bg-panel);
-      transition: border-color 0.3s, transform 0.2s;
+      border: 1px solid var(--border-dim);
+      border-radius: 12px;
+      transition: border-color 0.2s, transform 0.2s;
     }
     .system-card:hover {
       border-color: var(--border-bright);
       transform: translateY(-2px);
     }
-    .system-name { font-weight: 600; font-size: 1rem; margin-bottom: 0.25rem; }
-    .system-distance {
-      font-family: var(--font-mono);
+    .system-card .name {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+    .system-card .type {
       font-size: 0.75rem;
-      color: var(--accent-teal);
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
       margin-bottom: 0.5rem;
     }
-    .system-desc { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; }
-    .system-group-label {
+    .system-card .distance {
+      font-size: 0.85rem;
+      color: var(--accent-amber);
+    }
+
+    /* STATS */
+    .stats {
+      padding: 4rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      text-align: center;
+    }
+    .stat-number {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--accent-teal);
       font-family: var(--font-mono);
-      font-size: 0.7rem;
+    }
+    .stat-label {
+      font-size: 0.85rem;
       color: var(--text-dim);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin: 2rem 0 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid var(--border-dim);
+      margin-top: 0.25rem;
     }
-    .system-group-label:first-child { margin-top: 0; }
+
     /* PRICING */
-    .pricing-card {
-      max-width: 500px;
+    .pricing {
+      padding: 6rem 2rem;
+      text-align: center;
+    }
+    .price-card {
+      max-width: 420px;
+      margin: 0 auto;
       padding: 3rem;
-      border: 1px solid var(--border-bright);
-      border-radius: 16px;
       background: var(--bg-panel);
+      border: 1px solid var(--border-bright);
+      border-radius: 20px;
+      box-shadow: 0 0 80px rgba(63,224,216,0.05);
     }
-    .pricing-card h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
-    .price-tagline { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 2rem; }
-    .pricing-features { list-style: none; margin-bottom: 2rem; }
-    .pricing-features li {
-      padding: 0.5rem 0;
+    .price-amount {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .price-period {
+      color: var(--text-dim);
       font-size: 0.9rem;
-      color: var(--text-secondary);
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
+      margin-bottom: 2rem;
     }
-    .check { color: var(--accent-teal); font-weight: 700; }
+    .price-features {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 2rem;
+    }
+    .price-features li {
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+    .price-features li::before {
+      content: '✓ ';
+      color: var(--accent-teal);
+      font-weight: 700;
+    }
+
     /* FOOTER */
     footer {
       padding: 3rem 2rem;
+      text-align: center;
       border-top: 1px solid var(--border-dim);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      max-width: 1200px;
-      margin: 0 auto;
     }
     .footer-brand {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 0.75rem;
-      font-weight: 600;
-      font-size: 0.9rem;
+      margin-bottom: 1rem;
     }
     .footer-brand img { width: 28px; height: 28px; border-radius: 6px; }
-    .footer-links { display: flex; gap: 1.5rem; }
-    .footer-links a {
+    .footer-brand span { font-weight: 600; }
+    footer p {
       color: var(--text-dim);
+      font-size: 0.85rem;
+    }
+    footer a {
+      color: var(--accent-teal);
       text-decoration: none;
-      font-size: 0.8rem;
-      transition: color 0.2s;
     }
-    .footer-links a:hover { color: var(--text-secondary); }
-    .footer-copy {
-      width: 100%;
-      text-align: center;
-      font-size: 0.75rem;
-      color: var(--text-dim);
-      margin-top: 1rem;
-    }
-    .fade-in { opacity: 1 !important; transform: translateY(0) !important; }
+
     /* RESPONSIVE */
     @media (max-width: 768px) {
-      nav { padding: 0.75rem 1rem; }
-      .nav-links { gap: 1rem; }
-      .nav-links a:not(.btn-appstore) { display: none; }
-      .hero { padding: 6rem 1.5rem 3rem; }
-      .hero-globe { width: 110px; height: 110px; }
-      .stats { gap: 1.5rem; }
-      .stat-number { font-size: 1.75rem; }
-      .features-grid { grid-template-columns: 1fr; }
-      .systems-grid { grid-template-columns: 1fr; }
-      .screenshot-gallery { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
-      .showcase { grid-template-columns: 1fr; gap: 2rem; }
-      .showcase-reversed { grid-template-columns: 1fr; }
-      .showcase-reversed .showcase-phone { order: 1; }
-      .showcase-reversed .showcase-text { order: 2; }
-      .showcase-phone { max-width: 280px; margin: 0 auto; }
-      footer { flex-direction: column; text-align: center; }
-      .footer-links { justify-content: center; }
+      .nav-links { display: none; }
+      .feature-row, .feature-row.reverse {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        direction: ltr;
+      }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .showcase-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+      .phone-frame { width: 160px; }
+      .feature-phone .phone-frame { width: 220px; }
+    }
+    @media (max-width: 480px) {
+      .showcase-grid { grid-template-columns: repeat(2, 1fr); }
+      .phone-frame { width: 140px; }
     }
   </style>
 </head>
@@ -483,305 +417,246 @@
   <nav>
     <a href="#" class="nav-brand">
       <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663409616614/uFcgWwGACrkhMICi.png" alt="Around The Block Explorer" />
-      <span>Around The Block Explorer</span>
+      <span>Around The Block</span>
     </a>
     <div class="nav-links">
       <a href="#features">Features</a>
       <a href="#systems">Systems</a>
       <a href="#pricing">Pricing</a>
-      <a href="#" class="btn-appstore" id="appstore-link">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-        App Store
-      </a>
     </div>
   </nav>
 
   <!-- HERO -->
   <section class="hero">
     <div class="hero-bg"></div>
-    <div class="hero-content fade-in">
+    <div class="hero-content">
       <div class="hero-globe">
         <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663409616614/uFcgWwGACrkhMICi.png" alt="Around The Block Explorer" />
       </div>
-      <div class="hero-badge">◆ iOS App — From Sol to Deep Space</div>
+      <div class="hero-badge">iOS &bull; Built from real astronomy</div>
       <h1>View our Sun in the sky from <span class="accent">other worlds</span></h1>
       <p class="hero-subtitle">
         A real 3D star-system explorer. Visit 28 star systems, see the sky as it would appear from alien surfaces, watch spacetime bend around stars, and warp between worlds — all built from real published astronomy.
       </p>
       <div class="hero-cta">
-        <a href="#" class="btn-primary" id="hero-appstore">
+        <a href="https://apps.apple.com/app/around-the-block-explorer/id6743640301" class="btn-primary">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-          Coming Soon on the App Store
+          Download on App Store
         </a>
-        <a href="#features" class="btn-secondary">Explore Features</a>
+        <a href="#features" class="btn-secondary">See what's inside</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHONE SHOWCASE -->
+  <section class="showcase">
+    <div class="showcase-grid">
+      <div class="phone-frame">
+        <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663409616614/anLaAqkdEIdTnwVC.PNG" alt="Galaxy map showing nearby star systems" loading="lazy" />
+      </div>
+      <div class="phone-frame">
+        <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663409616614/YxXqehReBTraINFx.PNG" alt="Spacetime curvature grid around Sirius" loading="lazy" />
+      </div>
+      <div class="phone-frame">
+        <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663409616614/RqUiBFaOrrbYxMCv.PNG" alt="T Coronae Borealis with mass transfer" loading="lazy" />
+      </div>
+      <div class="phone-frame">
+        <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663409616614/rIxXujygHQNyXdMp.PNG" alt="TRAPPIST-1 system with seven worlds" loading="lazy" />
+      </div>
+      <div class="phone-frame">
+        <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663409616614/CyxkiEkbDqMsHjwO.PNG" alt="The sky from Barnard c" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <div class="section-header">
+      <div class="section-label">Features</div>
+      <h2>Explore the universe from the surface up</h2>
+      <p>Every feature is grounded in real published data from NASA, ESA, and peer-reviewed catalogs.</p>
+    </div>
+
+    <!-- Feature 1: Spacetime -->
+    <div class="feature-row">
+      <div class="feature-text">
+        <h3>Spacetime Curvature Grid</h3>
+        <p>Watch a three-dimensional lattice of geodesics bend and warp around each star. The more massive the star, the deeper the well. Sirius, Betelgeuse, and every system in between — visualized in real time as you orbit.</p>
+      </div>
+      <div class="feature-phone">
+        <div class="phone-frame">
+          <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663409616614/YxXqehReBTraINFx.PNG" alt="Spacetime curvature visualization around Sirius" loading="lazy" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature 2: T CrB -->
+    <div class="feature-row reverse">
+      <div class="feature-text">
+        <h3>T Coronae Borealis — The Blaze Star</h3>
+        <p>A red giant so close to its white-dwarf companion that hydrogen streams between them in a fiery accretion disk. Watch the mass transfer in 3D, then trigger the nova to see what happens when the pressure ignites.</p>
+      </div>
+      <div class="feature-phone">
+        <div class="phone-frame">
+          <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663409616614/RqUiBFaOrrbYxMCv.PNG" alt="T Coronae Borealis binary system" loading="lazy" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature 3: Surface Sky -->
+    <div class="feature-row">
+      <div class="feature-text">
+        <h3>The Sky From Other Worlds</h3>
+        <p>Stand on Barnard c and find our Sun in the sky — magnitude 1.1, tucked between altered constellations. Visit Wolf 1061 b, a tidally locked world where the sun never rises on the night side. Every sky is computed from real stellar positions.</p>
+      </div>
+      <div class="feature-phone">
+        <div class="phone-frame">
+          <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663409616614/CyxkiEkbDqMsHjwO.PNG" alt="The sky from Barnard c showing altered constellations" loading="lazy" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature 4: Eclipse Chasers -->
+    <div class="feature-row reverse">
+      <div class="feature-text">
+        <h3>Eclipse Chasers</h3>
+        <p>Every total and hybrid solar eclipse through 2051, city by city. Each path checked against NASA data with local timings, band widths, and a "Remind me" notification one month and one day before totality.</p>
+      </div>
+      <div class="feature-phone">
+        <div class="phone-frame">
+          <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663409616614/ySpMMbNxYuAgAexQ.PNG" alt="Eclipse chasers with path map" loading="lazy" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature 5: Telescopes -->
+    <div class="feature-row">
+      <div class="feature-text">
+        <h3>Scope Matchmaker</h3>
+        <p>Three questions, one honest recommendation. No brand deals — just the setups astronomy clubs point beginners toward. Then see what each world actually looks like through a backyard telescope.</p>
+      </div>
+      <div class="feature-phone">
+        <div class="phone-frame">
+          <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663409616614/pUyXTIiSHWyfxdgv.PNG" alt="Scope Matchmaker telescope quiz" loading="lazy" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature 6: Red Night Mode -->
+    <div class="feature-row reverse">
+      <div class="feature-text">
+        <h3>Red Night Mode</h3>
+        <p>Preserves your night vision at the telescope. The entire interface shifts to deep red — no blue light leaking into your dark-adapted eyes. Battery saver, softer haptics, and unit preferences all in one place.</p>
+      </div>
+      <div class="feature-phone">
+        <div class="phone-frame">
+          <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663409616614/HVnwQdUkLCDaZlva.PNG" alt="Red night mode settings" loading="lazy" />
+        </div>
       </div>
     </div>
   </section>
 
   <!-- STATS -->
-  <div class="stats fade-in">
-    <div class="stat-item">
+  <div class="stats">
+    <div>
       <div class="stat-number">28</div>
       <div class="stat-label">Star Systems</div>
     </div>
-    <div class="stat-item">
+    <div>
       <div class="stat-number">100+</div>
       <div class="stat-label">Celestial Bodies</div>
     </div>
-    <div class="stat-item">
+    <div>
       <div class="stat-number">41,487</div>
-      <div class="stat-label">Real Stars in the Sky</div>
+      <div class="stat-label">Background Stars</div>
     </div>
-    <div class="stat-item">
-      <div class="stat-number">0</div>
-      <div class="stat-label">Ads or Subscriptions</div>
-    </div>
-  </div>
-
-  <!-- SCREENSHOT GALLERY -->
-  <div class="screenshot-gallery">
-    <div class="screenshot-item">
-      <div class="screenshot-caption">Galaxy Map</div>
-    </div>
-    <div class="screenshot-item">
-      <div class="screenshot-caption">Spacetime Grid</div>
-    </div>
-    <div class="screenshot-item">
-      <div class="screenshot-caption">T Coronae Borealis</div>
-    </div>
-    <div class="screenshot-item">
-      <div class="screenshot-caption">TRAPPIST-1</div>
-    </div>
-    <div class="screenshot-item">
-      <div class="screenshot-caption">Sky from Barnard c</div>
+    <div>
+      <div class="stat-number">20</div>
+      <div class="stat-label">Solar Eclipses</div>
     </div>
   </div>
 
-  <!-- SHOWCASE: SPACETIME -->
-  <div class="showcase">
-    <div class="showcase-phone">
+  <!-- STAR SYSTEMS -->
+  <section class="systems" id="systems">
+    <div class="section-header">
+      <div class="section-label">Star Systems</div>
+      <h2>28 systems. Real data. Real distances.</h2>
+      <p>From our own Solar System to deep-sky landmarks thousands of light-years away.</p>
     </div>
-    <div class="showcase-text">
-      <h2>Geodesics you can see</h2>
-      <p>
-        A real-time spacetime grid bends around every massive body in the system. The curvature depth is computed from actual stellar and planetary masses — heavier objects create deeper wells.
-      </p>
-      <ul class="showcase-list">
-        <li>Up to 16 simultaneous gravity wells rendered per system</li>
-        <li>Heat-mapped grid lines show curvature intensity</li>
-        <li>Toggle on/off from the display settings panel</li>
-        <li>Educational visualization of general relativity</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- SHOWCASE: T CrB -->
-  <div class="showcase showcase-reversed">
-    <div class="showcase-phone">
-    </div>
-    <div class="showcase-text">
-      <h2>Watch a nova build in real time</h2>
-      <p>
-        T Coronae Borealis: a white dwarf siphoning hydrogen from its red giant companion, building toward a thermonuclear eruption visible to the naked eye. The last one was in 1946 — the next could happen any day.
-      </p>
-      <ul class="showcase-list">
-        <li>Accretion disk rendered from mass-transfer physics</li>
-        <li>Tap the NOVA button to trigger the eruption event</li>
-        <li>2,940 light-years away — the farthest system in the app</li>
-        <li>Time scrub to watch the orbit evolve</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- SHOWCASE: SKY VIEW -->
-  <div class="showcase">
-    <div class="showcase-phone">
-    </div>
-    <div class="showcase-text">
-      <h2>See the sky from another world</h2>
-      <p>
-        The surface view places you on any celestial body in the catalog. The sky above is computed in real time from the 41,487-star HYG catalog, repositioned to that world's coordinates. Find Sol — see where home is from 6 light-years away.
-      </p>
-      <ul class="showcase-list">
-        <li>Constellations shift and distort from the new vantage point</li>
-        <li>"You Are Here" marker shows our Sun's position and magnitude</li>
-        <li>Accurate day/night cycle with atmospheric scattering</li>
-        <li>Pinch to zoom, drag to look around the full 360° sky</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- SHOWCASE: ECLIPSE -->
-  <div class="showcase showcase-reversed">
-    <div class="showcase-phone">
-    </div>
-    <div class="showcase-text">
-      <h2>Chase every eclipse through 2051</h2>
-      <p>
-        Twenty total and hybrid solar eclipses, each with a real path map, verified city-by-city timings checked against NASA data, and local reminders so you never miss one.
-      </p>
-      <ul class="showcase-list">
-        <li>Greatest eclipse time, longest totality, and band width</li>
-        <li>Set reminders: one month and one day before</li>
-        <li>Safe-viewing gear guide included</li>
-        <li>If a city is not listed, it is not in the band</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- FEATURES -->
-  <section id="features">
-    <div class="section-label">// capabilities</div>
-    <h2 class="section-title">Built on real astrophysics</h2>
-    <p class="section-desc">
-      Every orbit, every star color, every sky is computed from published scientific data — NASA Exoplanet Archive, SIMBAD, and the HYG 41,487-star catalog.
-    </p>
-    <div class="features-grid">
-      <div class="feature-card">
-        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
-        <h3>Interactive 3D Galaxy Map</h3>
-        <p>Orbit, zoom, and pan through a real-scale map of 28 star systems. Each star's position, color, and size are derived from astronomical catalogs.</p>
-      </div>
-      <div class="feature-card">
-        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3v18M3 12h18M5.636 5.636l12.728 12.728M18.364 5.636L5.636 18.364"/><circle cx="12" cy="12" r="3"/></svg>
-        <h3>Spacetime Curvature Grid</h3>
-        <p>Watch spacetime bend in real time. A geodesic grid warps around each star and planet based on actual mass data, visualizing general relativity.</p>
-      </div>
-      <div class="feature-card">
-        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-        <h3>First-Person Alien Skies</h3>
-        <p>See the sky as it would actually appear from another world — with the correct suns, shifted constellations, and a "You Are Here" marker showing where our Sun sits.</p>
-      </div>
-      <div class="feature-card">
-        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-        <h3>Warp Travel Between Systems</h3>
-        <p>Tap any star on the galaxy map to initiate warp travel. 520 star streaks accelerate into a light tunnel, flash at peak velocity, then decelerate as the destination fades in.</p>
-      </div>
-      <div class="feature-card">
-        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        <h3>Time Control</h3>
-        <p>Scrub forward and backward through simulated time. Watch orbits evolve, see planets move, and trigger rare events like the T Coronae Borealis nova.</p>
-      </div>
-      <div class="feature-card">
-        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
-        <h3>Original Soundtrack</h3>
-        <p>10 ambient tracks composed for the app. Each star system zone plays its own randomized soundtrack that loops seamlessly as you explore.</p>
-      </div>
-      <div class="feature-card">
-        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 12l2 2 4-4"/></svg>
-        <h3>Eclipse Chasers</h3>
-        <p>Every total and hybrid solar eclipse from 2026 to 2051, with real path maps, verified city times, and reminder notifications.</p>
-      </div>
-      <div class="feature-card">
-        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
-        <h3>Scope Matchmaker</h3>
-        <p>Three questions, one honest telescope recommendation. No brand deals — just the setups astronomy clubs point beginners toward. See what each world looks like through real gear.</p>
-      </div>
-      <div class="feature-card">
-        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-        <h3>Sky Postcards</h3>
-        <p>Capture and share screenshots of alien skies as postcards. Save them to your photo library or share directly with friends.</p>
-      </div>
-      <div class="feature-card">
-        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>
-        <h3>Red Night Mode</h3>
-        <p>Preserve your dark adaptation with a full red-palette night mode. The entire UI shifts to astronomer-friendly red for stargazing sessions.</p>
-      </div>
-      <div class="feature-card">
-        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-        <h3>Other Worlds Catalog</h3>
-        <p>Browse confirmed exoplanets from the NASA archive. Filter by habitable zone, view host star data, and visit any world's sky.</p>
-      </div>
-      <div class="feature-card">
-        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
-        <h3>Battery & Accessibility</h3>
-        <p>Battery saver mode, offline-first caching, reduced motion for warp effects, Dynamic Type support, and softer haptics option.</p>
-      </div>
+    <div class="systems-grid">
+      <div class="system-card"><div class="name">Sol</div><div class="type">Single Star</div><div class="distance">0.00 ly</div></div>
+      <div class="system-card"><div class="name">Alpha Centauri</div><div class="type">Triple Star</div><div class="distance">4.37 ly</div></div>
+      <div class="system-card"><div class="name">Barnard's Star</div><div class="type">Single Star</div><div class="distance">5.96 ly</div></div>
+      <div class="system-card"><div class="name">Luhman 16</div><div class="type">Binary Brown Dwarf</div><div class="distance">6.50 ly</div></div>
+      <div class="system-card"><div class="name">WISE 0855−0714</div><div class="type">Sub-Brown Dwarf</div><div class="distance">7.43 ly</div></div>
+      <div class="system-card"><div class="name">Wolf 359</div><div class="type">Single Star</div><div class="distance">7.86 ly</div></div>
+      <div class="system-card"><div class="name">Lalande 21185</div><div class="type">Single Star</div><div class="distance">8.31 ly</div></div>
+      <div class="system-card"><div class="name">Sirius</div><div class="type">Binary Star</div><div class="distance">8.66 ly</div></div>
+      <div class="system-card"><div class="name">Luyten 726-8</div><div class="type">Binary Star</div><div class="distance">8.79 ly</div></div>
+      <div class="system-card"><div class="name">Ross 154</div><div class="type">Single Star</div><div class="distance">9.70 ly</div></div>
+      <div class="system-card"><div class="name">Ross 248</div><div class="type">Single Star</div><div class="distance">10.30 ly</div></div>
+      <div class="system-card"><div class="name">Ross 128</div><div class="type">Single Star</div><div class="distance">11.01 ly</div></div>
+      <div class="system-card"><div class="name">Tau Ceti</div><div class="type">Single Star</div><div class="distance">11.91 ly</div></div>
+      <div class="system-card"><div class="name">Wolf 1061</div><div class="type">Single Star</div><div class="distance">14.05 ly</div></div>
+      <div class="system-card"><div class="name">40 Eridani</div><div class="type">Triple Star</div><div class="distance">16.34 ly</div></div>
+      <div class="system-card"><div class="name">Teegarden's Star</div><div class="type">Single Star</div><div class="distance">12.50 ly</div></div>
+      <div class="system-card"><div class="name">GJ 667 C</div><div class="type">Triple Star</div><div class="distance">23.62 ly</div></div>
+      <div class="system-card"><div class="name">LHS 1140</div><div class="type">Single Star</div><div class="distance">40.70 ly</div></div>
+      <div class="system-card"><div class="name">TRAPPIST-1</div><div class="type">Single Star</div><div class="distance">40.66 ly</div></div>
+      <div class="system-card"><div class="name">TOI-700</div><div class="type">Single Star</div><div class="distance">101.40 ly</div></div>
+      <div class="system-card"><div class="name">K2-18</div><div class="type">Single Star</div><div class="distance">124.00 ly</div></div>
+      <div class="system-card"><div class="name">Kepler-186</div><div class="type">Single Star</div><div class="distance">582.00 ly</div></div>
+      <div class="system-card"><div class="name">Kepler-442</div><div class="type">Single Star</div><div class="distance">1206.00 ly</div></div>
+      <div class="system-card"><div class="name">Kepler-452</div><div class="type">Single Star</div><div class="distance">1402.00 ly</div></div>
+      <div class="system-card"><div class="name">Polaris</div><div class="type">Triple Star</div><div class="distance">447.00 ly</div></div>
+      <div class="system-card"><div class="name">Betelgeuse</div><div class="type">Single Star</div><div class="distance">700.00 ly</div></div>
+      <div class="system-card"><div class="name">Mintaka / Alnitak / Alnilam</div><div class="type">Orion's Belt</div><div class="distance">~1,200 ly</div></div>
+      <div class="system-card"><div class="name">T Coronae Borealis</div><div class="type">Binary Star</div><div class="distance">2,940 ly</div></div>
     </div>
   </section>
 
-  <!-- SYSTEMS -->
-  <section id="systems">
-    <div class="section-label">// catalog</div>
-    <h2 class="section-title">28 star systems. From home to deep space.</h2>
-    <p class="section-desc">
-      Our Sun, the ten nearest neighbors, seven more within 50 light-years, and eleven landmark systems out to 2,940 light-years — every one modeled from published astrophysical data.
-    </p>
-
-    <div class="system-group-label">Our Solar System</div>
-    <div class="systems-grid">
-      <div class="system-card">
-        <div class="system-name">Sol (Our Sun)</div>
-        <div class="system-distance">0 ly — Home</div>
-        <div class="system-desc">Our own star and its eight planets, five dwarf planets, the Moon, and three interstellar visitors (1I/'Oumuamua, 2I/Borisov, 3I/ATLAS).</div>
+  <!-- ABOUT THE SCIENCE -->
+  <section class="features" style="padding-bottom: 2rem;">
+    <div class="feature-row">
+      <div class="feature-text">
+        <h3>Built from real, published astronomy</h3>
+        <p>Every star and planet gets its size, mass, temperature, distance, and orbit from peer-reviewed sources. Each body's profile links to its official NASA page when available. Where data is missing, we fill gaps with honest guesswork — and tell you exactly where.</p>
+        <p style="margin-top: 1rem; color: var(--text-dim); font-size: 0.9rem;">Sources: NASA Exoplanet Archive &bull; SIMBAD &bull; HYG Database &bull; IAU &bull; ESA Gaia DR3</p>
       </div>
-    </div>
-
-    <div class="system-group-label">The Ten Nearest Star Systems (4–10 ly)</div>
-    <div class="systems-grid">
-      <div class="system-card"><div class="system-name">Alpha Centauri</div><div class="system-distance">4.37 ly</div><div class="system-desc">Triple star system. Proxima b orbits in the habitable zone. A and B orbit each other every 80 years.</div></div>
-      <div class="system-card"><div class="system-name">Barnard's Star</div><div class="system-distance">5.96 ly</div><div class="system-desc">The fastest-moving star in our sky, hosting four tiny rocky worlds confirmed in 2024–2025.</div></div>
-      <div class="system-card"><div class="system-name">Luhman 16</div><div class="system-distance">6.5 ly</div><div class="system-desc">Binary brown dwarfs discovered in 2013. Luhman 16 B has mapped weather: patchy silicate clouds.</div></div>
-      <div class="system-card"><div class="system-name">WISE 0855−0714</div><div class="system-distance">7.43 ly</div><div class="system-desc">The coldest known object of its kind. Surface temperature ~250 K, with evidence of water-ice clouds.</div></div>
-      <div class="system-card"><div class="system-name">Wolf 359</div><div class="system-distance">7.86 ly</div><div class="system-desc">A tiny, violent flare star. Only 11% the Sun's mass, near the minimum for a true star.</div></div>
-      <div class="system-card"><div class="system-name">Lalande 21185</div><div class="system-distance">8.31 ly</div><div class="system-desc">The brightest red dwarf in the northern sky, with a confirmed rocky super-Earth.</div></div>
-      <div class="system-card"><div class="system-name">Sirius</div><div class="system-distance">8.66 ly</div><div class="system-desc">The brightest star in Earth's night sky. Sirius B packs the Sun's mass into an Earth-sized sphere.</div></div>
-      <div class="system-card"><div class="system-name">Luyten 726-8</div><div class="system-distance">8.79 ly</div><div class="system-desc">Home of UV Ceti — the star so twitchy it named an entire class of flare stars.</div></div>
-      <div class="system-card"><div class="system-name">Ross 154</div><div class="system-distance">9.71 ly</div><div class="system-desc">A young, active red dwarf that flares roughly once every two days.</div></div>
-      <div class="system-card"><div class="system-name">Ross 248</div><div class="system-distance">10.3 ly</div><div class="system-desc">In ~36,000 years, this star will briefly become the closest to our Sun.</div></div>
-    </div>
-
-    <div class="system-group-label">Extended Neighborhood (11–49 ly)</div>
-    <div class="systems-grid">
-      <div class="system-card"><div class="system-name">Ross 128</div><div class="system-distance">11.0 ly</div><div class="system-desc">One of the quietest red dwarfs nearby, hosting a temperate Earth-mass world.</div></div>
-      <div class="system-card"><div class="system-name">Tau Ceti</div><div class="system-distance">11.9 ly</div><div class="system-desc">The nearest lone Sun-like star. Four candidate super-Earths, two near the habitable zone.</div></div>
-      <div class="system-card"><div class="system-name">Teegarden's Star</div><div class="system-distance">12.5 ly</div><div class="system-desc">An ancient red dwarf whose planets b and c are among the most Earth-like ever found.</div></div>
-      <div class="system-card"><div class="system-name">40 Eridani</div><div class="system-distance">16.3 ly</div><div class="system-desc">A triple star of three very different suns. Famous in fiction as the home of Vulcan.</div></div>
-      <div class="system-card"><div class="system-name">GJ 667 C</div><div class="system-distance">23.6 ly</div><div class="system-desc">A red dwarf in a triple system with a confirmed super-Earth in its habitable zone.</div></div>
-      <div class="system-card"><div class="system-name">TRAPPIST-1</div><div class="system-distance">40.7 ly</div><div class="system-desc">Seven Earth-sized worlds around a single tiny star. Three in the habitable zone.</div></div>
-      <div class="system-card"><div class="system-name">LHS 1140</div><div class="system-distance">48.9 ly</div><div class="system-desc">A transiting habitable-zone super-Earth that may be a water world. A prime JWST target.</div></div>
-    </div>
-
-    <div class="system-group-label">Deep Sky — Landmark Systems (100–2,940 ly)</div>
-    <div class="systems-grid">
-      <div class="system-card"><div class="system-name">TOI-700</div><div class="system-distance">101 ly</div><div class="system-desc">A quiet red dwarf hosting two Earth-size worlds in its habitable zone.</div></div>
-      <div class="system-card"><div class="system-name">K2-18</div><div class="system-distance">124 ly</div><div class="system-desc">Center of the 'hycean world' debate. JWST detected methane and CO2 in 2023.</div></div>
-      <div class="system-card"><div class="system-name">Polaris</div><div class="system-distance">433 ly</div><div class="system-desc">The North Star. A pulsating Cepheid supergiant in a triple system.</div></div>
-      <div class="system-card"><div class="system-name">Betelgeuse</div><div class="system-distance">498 ly</div><div class="system-desc">The doomed red supergiant on Orion's shoulder. ~764× the Sun's radius.</div></div>
-      <div class="system-card"><div class="system-name">Kepler-186</div><div class="system-distance">580 ly</div><div class="system-desc">Home of Kepler-186f — the first Earth-size planet in a star's habitable zone.</div></div>
-      <div class="system-card"><div class="system-name">Mintaka</div><div class="system-distance">692 ly</div><div class="system-desc">Orion's Belt (west). A massive multiple system with an eclipsing binary at its heart.</div></div>
-      <div class="system-card"><div class="system-name">Alnitak</div><div class="system-distance">736 ly</div><div class="system-desc">Orion's Belt (east). The brightest O-type star visible from Earth.</div></div>
-      <div class="system-card"><div class="system-name">Kepler-442</div><div class="system-distance">1,206 ly</div><div class="system-desc">An orange dwarf hosting one of the most promising habitable-zone super-Earths.</div></div>
-      <div class="system-card"><div class="system-name">Kepler-452</div><div class="system-distance">1,800 ly</div><div class="system-desc">A Sun-like star famed for 'Earth's cousin' Kepler-452b.</div></div>
-      <div class="system-card"><div class="system-name">Alnilam</div><div class="system-distance">1,977 ly</div><div class="system-desc">Orion's Belt (center). A lone blue supergiant, 300,000–500,000× the Sun's luminosity.</div></div>
-      <div class="system-card"><div class="system-name">T Coronae Borealis</div><div class="system-distance">2,940 ly</div><div class="system-desc">The 'Blaze Star' — a recurrent nova expected to erupt any year now.</div></div>
+      <div class="feature-phone">
+        <div class="phone-frame">
+          <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663409616614/noeTXFUTMBqRJkJU.PNG" alt="About the Science page" loading="lazy" />
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- PRICING -->
-  <section id="pricing">
-    <div class="section-label">// one price</div>
-    <h2 class="section-title">Own the whole universe</h2>
-    <p class="section-desc">
-      One purchase. No subscription. No ads. No tracking. Every star, every world, every sky — done beautifully, with nothing to unlock.
-    </p>
-    <div class="pricing-card">
-      <h3>Around The Block Explorer</h3>
-      <p class="price-tagline">One-time purchase on the App Store</p>
-      <ul class="pricing-features">
-        <li><span class="check">✓</span> All 28 star systems and 100+ celestial bodies</li>
-        <li><span class="check">✓</span> 41,487-star real sky from any surface</li>
-        <li><span class="check">✓</span> Spacetime curvature visualization</li>
-        <li><span class="check">✓</span> Warp travel between systems</li>
-        <li><span class="check">✓</span> Exoplanet catalog with habitable-zone filters</li>
-        <li><span class="check">✓</span> Eclipse chaser with reminders (2026–2051)</li>
-        <li><span class="check">✓</span> Original 10-track ambient soundtrack</li>
-        <li><span class="check">✓</span> Scope Matchmaker telescope guide</li>
-        <li><span class="check">✓</span> Red night mode for stargazing</li>
-        <li><span class="check">✓</span> Free data updates as new worlds are confirmed</li>
-        <li><span class="check">✓</span> No ads. No subscriptions. No tracking. Ever.</li>
+  <section class="pricing" id="pricing">
+    <div class="section-header">
+      <div class="section-label">Pricing</div>
+      <h2>One price. Everything. Forever.</h2>
+      <p>No subscriptions. No ads. No in-app purchases. Buy once, explore forever.</p>
+    </div>
+    <div class="price-card">
+      <div class="price-amount">$7.99</div>
+      <div class="price-period">One-time purchase</div>
+      <ul class="price-features">
+        <li>All 28 star systems</li>
+        <li>100+ celestial bodies with full profiles</li>
+        <li>Surface sky views from alien worlds</li>
+        <li>Spacetime curvature visualization</li>
+        <li>Warp travel between systems</li>
+        <li>Eclipse chasers through 2051</li>
+        <li>Scope Matchmaker telescope guide</li>
+        <li>Original soundtrack</li>
+        <li>Red night mode</li>
+        <li>All future updates included</li>
       </ul>
-      <a href="#" class="btn-primary" id="pricing-appstore">Coming Soon on the App Store</a>
+      <a href="https://apps.apple.com/app/around-the-block-explorer/id6743640301" class="btn-primary" style="width: 100%; justify-content: center;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Get it on the App Store
+      </a>
     </div>
   </section>
 
@@ -791,37 +666,8 @@
       <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663409616614/uFcgWwGACrkhMICi.png" alt="Around The Block Explorer" />
       <span>Around The Block Explorer</span>
     </div>
-    <div class="footer-links">
-      <a href="https://4thgen415-ui.github.io/around-the-block-legal/privacy.html">Privacy Policy</a>
-      <a href="https://4thgen415-ui.github.io/around-the-block-legal/terms.html">Terms of Service</a>
-      <a href="mailto:support@aroundtheblock.space">Contact</a>
-    </div>
-    <p class="footer-copy">© 2026 appenstance, LLC. All rights reserved. Data from NASA, SIMBAD, and HYG v4.1.</p>
+    <p>Made by <a href="https://appenstance.dev">appenstance, LLC</a> &bull; Built from real astronomy &bull; &copy; 2025</p>
   </footer>
 
-  <script>
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
-      document.querySelectorAll('.feature-card, .system-card, .showcase, .pricing-card, .screenshot-item').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1), transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
-        observer.observe(el);
-      });
-    }
-    document.querySelectorAll('#appstore-link, #hero-appstore, #pricing-appstore').forEach(el => {
-      el.addEventListener('click', (e) => {
-        e.preventDefault();
-        alert('App Store link will be available once the app is published.');
-      });
-    });
-  </script>
 </body>
 </html>
