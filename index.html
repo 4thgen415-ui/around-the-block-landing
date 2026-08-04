@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Around The Block Explorer — Explore 28 Star Systems in 3D</title>
-  <meta name="description" content="A real 3D star-system explorer for iOS. Visit 28 star systems from Sol to deep space, stand on alien worlds, watch eclipses, warp between stars, and see the sky from another sun. One price. No ads. No subscriptions." />
+  <title>Around The Block Explorer — See Our Sun From Other Worlds</title>
+  <meta name="description" content="A real 3D star-system explorer for iOS. Visit 28 star systems, view the sky from alien worlds, watch spacetime bend around stars, and travel between systems at warp speed. One price. No ads. No subscriptions." />
   <link rel="icon" type="image/png" href="https://files.manuscdn.com/user_upload_by_module/session_file/310519663409616614/uFcgWwGACrkhMICi.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -57,11 +57,7 @@
       font-size: 1rem;
     }
     .nav-brand img { width: 36px; height: 36px; border-radius: 8px; }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-    }
+    .nav-links { display: flex; align-items: center; gap: 2rem; }
     .nav-links a {
       color: var(--text-secondary);
       text-decoration: none;
@@ -104,6 +100,35 @@
     .hero-content {
       position: relative;
       max-width: 800px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    /* GLOBE LOGO */
+    .hero-globe {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 2px solid var(--border-bright);
+      box-shadow: 0 0 40px rgba(63, 224, 216, 0.15), 0 0 80px rgba(63, 224, 216, 0.05), inset 0 0 30px rgba(63, 224, 216, 0.08);
+      margin-bottom: 2rem;
+      overflow: hidden;
+      position: relative;
+      background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.08) 0%, transparent 60%);
+    }
+    .hero-globe img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    .hero-globe::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 25%, rgba(255,255,255,0.12) 0%, transparent 50%);
+      pointer-events: none;
     }
     .hero-badge {
       display: inline-block;
@@ -130,12 +155,7 @@
       margin: 0 auto 2.5rem;
       line-height: 1.7;
     }
-    .hero-cta {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
+    .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
     .btn-primary {
       display: inline-flex;
       align-items: center;
@@ -216,6 +236,45 @@
       margin-bottom: 3rem;
       line-height: 1.7;
     }
+    /* SCREENSHOT GALLERY */
+    .screenshot-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      max-width: 1200px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+    }
+    .screenshot-item {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border-dim);
+      transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.3s;
+      aspect-ratio: 9/19.5;
+    }
+    .screenshot-item:hover {
+      transform: translateY(-4px) scale(1.02);
+      border-color: var(--border-bright);
+    }
+    .screenshot-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .screenshot-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem 1rem 1rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
     /* FEATURES */
     .features-grid {
       display: grid;
@@ -249,66 +308,30 @@
       color: var(--text-secondary);
       line-height: 1.6;
     }
-    /* SYSTEMS */
-    .systems-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1rem;
-    }
-    .system-card {
-      padding: 1.25rem 1.5rem;
-      border: 1px solid var(--border-dim);
-      border-radius: 10px;
-      background: var(--bg-panel);
-      transition: border-color 0.3s, transform 0.2s;
-    }
-    .system-card:hover {
-      border-color: var(--border-bright);
-      transform: translateY(-2px);
-    }
-    .system-name {
-      font-weight: 600;
-      font-size: 1rem;
-      margin-bottom: 0.25rem;
-    }
-    .system-distance {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--accent-teal);
-      margin-bottom: 0.5rem;
-    }
-    .system-desc {
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-      line-height: 1.5;
-    }
-    .system-group-label {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin: 2rem 0 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid var(--border-dim);
-    }
-    .system-group-label:first-child { margin-top: 0; }
     /* SHOWCASE */
     .showcase {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 280px 1fr;
       gap: 3rem;
       align-items: center;
       max-width: 1100px;
-      margin: 4rem auto;
+      margin: 5rem auto;
       padding: 0 2rem;
     }
-    .showcase-reversed { direction: rtl; }
-    .showcase-reversed > * { direction: ltr; }
-    .showcase-image {
+    .showcase-reversed { grid-template-columns: 1fr 280px; }
+    .showcase-reversed .showcase-phone { order: 2; }
+    .showcase-reversed .showcase-text { order: 1; }
+    .showcase-phone {
+      border-radius: 24px;
+      overflow: hidden;
+      border: 2px solid var(--border-dim);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      aspect-ratio: 9/19.5;
+    }
+    .showcase-phone img {
       width: 100%;
-      border-radius: 12px;
-      border: 1px solid var(--border-dim);
+      height: 100%;
+      object-fit: cover;
     }
     .showcase-text h2 {
       font-size: 1.5rem;
@@ -334,11 +357,47 @@
       position: relative;
     }
     .showcase-list li::before {
-      content: '→';
+      content: '\2192';
       position: absolute;
       left: 0;
       color: var(--accent-teal);
     }
+    /* SYSTEMS */
+    .systems-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .system-card {
+      padding: 1.25rem 1.5rem;
+      border: 1px solid var(--border-dim);
+      border-radius: 10px;
+      background: var(--bg-panel);
+      transition: border-color 0.3s, transform 0.2s;
+    }
+    .system-card:hover {
+      border-color: var(--border-bright);
+      transform: translateY(-2px);
+    }
+    .system-name { font-weight: 600; font-size: 1rem; margin-bottom: 0.25rem; }
+    .system-distance {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent-teal);
+      margin-bottom: 0.5rem;
+    }
+    .system-desc { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; }
+    .system-group-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin: 2rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-dim);
+    }
+    .system-group-label:first-child { margin-top: 0; }
     /* PRICING */
     .pricing-card {
       max-width: 500px;
@@ -347,20 +406,9 @@
       border-radius: 16px;
       background: var(--bg-panel);
     }
-    .pricing-card h3 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-    .price-tagline {
-      color: var(--text-dim);
-      font-size: 0.9rem;
-      margin-bottom: 2rem;
-    }
-    .pricing-features {
-      list-style: none;
-      margin-bottom: 2rem;
-    }
+    .pricing-card h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .price-tagline { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 2rem; }
+    .pricing-features { list-style: none; margin-bottom: 2rem; }
     .pricing-features li {
       padding: 0.5rem 0;
       font-size: 0.9rem;
@@ -370,10 +418,7 @@
       align-items: center;
       gap: 0.75rem;
     }
-    .check {
-      color: var(--accent-teal);
-      font-weight: 700;
-    }
+    .check { color: var(--accent-teal); font-weight: 700; }
     /* FOOTER */
     footer {
       padding: 3rem 2rem;
@@ -394,10 +439,7 @@
       font-size: 0.9rem;
     }
     .footer-brand img { width: 28px; height: 28px; border-radius: 6px; }
-    .footer-links {
-      display: flex;
-      gap: 1.5rem;
-    }
+    .footer-links { display: flex; gap: 1.5rem; }
     .footer-links a {
       color: var(--text-dim);
       text-decoration: none;
@@ -412,23 +454,24 @@
       color: var(--text-dim);
       margin-top: 1rem;
     }
-    /* FADE */
-    .fade-in {
-      opacity: 1 !important;
-      transform: translateY(0) !important;
-    }
+    .fade-in { opacity: 1 !important; transform: translateY(0) !important; }
     /* RESPONSIVE */
     @media (max-width: 768px) {
       nav { padding: 0.75rem 1rem; }
       .nav-links { gap: 1rem; }
       .nav-links a:not(.btn-appstore) { display: none; }
       .hero { padding: 6rem 1.5rem 3rem; }
+      .hero-globe { width: 110px; height: 110px; }
       .stats { gap: 1.5rem; }
       .stat-number { font-size: 1.75rem; }
       .features-grid { grid-template-columns: 1fr; }
       .systems-grid { grid-template-columns: 1fr; }
+      .screenshot-gallery { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
       .showcase { grid-template-columns: 1fr; gap: 2rem; }
-      .showcase-reversed { direction: ltr; }
+      .showcase-reversed { grid-template-columns: 1fr; }
+      .showcase-reversed .showcase-phone { order: 1; }
+      .showcase-reversed .showcase-text { order: 2; }
+      .showcase-phone { max-width: 280px; margin: 0 auto; }
       footer { flex-direction: column; text-align: center; }
       .footer-links { justify-content: center; }
     }
@@ -457,10 +500,13 @@
   <section class="hero">
     <div class="hero-bg"></div>
     <div class="hero-content fade-in">
+      <div class="hero-globe">
+        <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663409616614/uFcgWwGACrkhMICi.png" alt="Around The Block Explorer" />
+      </div>
       <div class="hero-badge">◆ iOS App — From Sol to Deep Space</div>
-      <h1>Stand on worlds orbiting <span class="accent">other suns</span></h1>
+      <h1>View our Sun in the sky from <span class="accent">other worlds</span></h1>
       <p class="hero-subtitle">
-        A real 3D star-system explorer. Visit 28 star systems from our Sun to TRAPPIST-1 and beyond, see spacetime bend around stars, watch the sky from alien surfaces, and travel between worlds at warp speed.
+        A real 3D star-system explorer. Visit 28 star systems, see the sky as it would appear from alien surfaces, watch spacetime bend around stars, and warp between worlds — all built from real published astronomy.
       </p>
       <div class="hero-cta">
         <a href="#" class="btn-primary" id="hero-appstore">
@@ -492,6 +538,106 @@
     </div>
   </div>
 
+  <!-- SCREENSHOT GALLERY -->
+  <div class="screenshot-gallery">
+    <div class="screenshot-item">
+      <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663409616614/mXPjyPTPFXcnJHWI.PNG" alt="Galaxy map showing nearby star systems" loading="lazy" />
+      <div class="screenshot-caption">Galaxy Map</div>
+    </div>
+    <div class="screenshot-item">
+      <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663409616614/nindKFnhbmXVeERd.PNG" alt="Spacetime curvature grid around Sirius" loading="lazy" />
+      <div class="screenshot-caption">Spacetime Grid</div>
+    </div>
+    <div class="screenshot-item">
+      <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663409616614/iqGiZgHniQIsfePi.PNG" alt="T Coronae Borealis with mass transfer" loading="lazy" />
+      <div class="screenshot-caption">T Coronae Borealis</div>
+    </div>
+    <div class="screenshot-item">
+      <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663409616614/BpQtTRXVBjjgCbqo.PNG" alt="TRAPPIST-1 system with seven worlds" loading="lazy" />
+      <div class="screenshot-caption">TRAPPIST-1</div>
+    </div>
+    <div class="screenshot-item">
+      <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663409616614/zuZeHgHqMBGECjaD.PNG" alt="The sky from Barnard c" loading="lazy" />
+      <div class="screenshot-caption">Sky from Barnard c</div>
+    </div>
+  </div>
+
+  <!-- SHOWCASE: SPACETIME -->
+  <div class="showcase">
+    <div class="showcase-phone">
+      <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663409616614/nindKFnhbmXVeERd.PNG" alt="Spacetime curvature visualization around Sirius" />
+    </div>
+    <div class="showcase-text">
+      <h2>Geodesics you can see</h2>
+      <p>
+        A real-time spacetime grid bends around every massive body in the system. The curvature depth is computed from actual stellar and planetary masses — heavier objects create deeper wells.
+      </p>
+      <ul class="showcase-list">
+        <li>Up to 16 simultaneous gravity wells rendered per system</li>
+        <li>Heat-mapped grid lines show curvature intensity</li>
+        <li>Toggle on/off from the display settings panel</li>
+        <li>Educational visualization of general relativity</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SHOWCASE: T CrB -->
+  <div class="showcase showcase-reversed">
+    <div class="showcase-phone">
+      <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663409616614/iqGiZgHniQIsfePi.PNG" alt="T Coronae Borealis binary system" />
+    </div>
+    <div class="showcase-text">
+      <h2>Watch a nova build in real time</h2>
+      <p>
+        T Coronae Borealis: a white dwarf siphoning hydrogen from its red giant companion, building toward a thermonuclear eruption visible to the naked eye. The last one was in 1946 — the next could happen any day.
+      </p>
+      <ul class="showcase-list">
+        <li>Accretion disk rendered from mass-transfer physics</li>
+        <li>Tap the NOVA button to trigger the eruption event</li>
+        <li>2,940 light-years away — the farthest system in the app</li>
+        <li>Time scrub to watch the orbit evolve</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SHOWCASE: SKY VIEW -->
+  <div class="showcase">
+    <div class="showcase-phone">
+      <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663409616614/zuZeHgHqMBGECjaD.PNG" alt="The sky from Barnard c showing altered constellations" />
+    </div>
+    <div class="showcase-text">
+      <h2>See the sky from another world</h2>
+      <p>
+        The surface view places you on any celestial body in the catalog. The sky above is computed in real time from the 41,487-star HYG catalog, repositioned to that world's coordinates. Find Sol — see where home is from 6 light-years away.
+      </p>
+      <ul class="showcase-list">
+        <li>Constellations shift and distort from the new vantage point</li>
+        <li>"You Are Here" marker shows our Sun's position and magnitude</li>
+        <li>Accurate day/night cycle with atmospheric scattering</li>
+        <li>Pinch to zoom, drag to look around the full 360° sky</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SHOWCASE: ECLIPSE -->
+  <div class="showcase showcase-reversed">
+    <div class="showcase-phone">
+      <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663409616614/LjsXqhSMHyqgETZX.PNG" alt="Eclipse chasers with path map" />
+    </div>
+    <div class="showcase-text">
+      <h2>Chase every eclipse through 2051</h2>
+      <p>
+        Twenty total and hybrid solar eclipses, each with a real path map, verified city-by-city timings checked against NASA data, and local reminders so you never miss one.
+      </p>
+      <ul class="showcase-list">
+        <li>Greatest eclipse time, longest totality, and band width</li>
+        <li>Set reminders: one month and one day before</li>
+        <li>Safe-viewing gear guide included</li>
+        <li>If a city is not listed, it is not in the band</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- FEATURES -->
   <section id="features">
     <div class="section-label">// capabilities</div>
@@ -503,7 +649,7 @@
       <div class="feature-card">
         <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
         <h3>Interactive 3D Galaxy Map</h3>
-        <p>Orbit, zoom, and pan through a real-scale map of 28 star systems. Each star's position, color, and size are derived from astronomical catalogs (Hipparcos, Gaia, HYG).</p>
+        <p>Orbit, zoom, and pan through a real-scale map of 28 star systems. Each star's position, color, and size are derived from astronomical catalogs.</p>
       </div>
       <div class="feature-card">
         <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3v18M3 12h18M5.636 5.636l12.728 12.728M18.364 5.636L5.636 18.364"/><circle cx="12" cy="12" r="3"/></svg>
@@ -513,7 +659,7 @@
       <div class="feature-card">
         <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
         <h3>First-Person Alien Skies</h3>
-        <p>Stand on the surface of exoplanets and see the sky as it would actually appear — with the correct suns, constellations, day/night cycle, and Milky Way from that vantage point.</p>
+        <p>See the sky as it would actually appear from another world — with the correct suns, shifted constellations, and a "You Are Here" marker showing where our Sun sits.</p>
       </div>
       <div class="feature-card">
         <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
@@ -523,7 +669,7 @@
       <div class="feature-card">
         <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         <h3>Time Control</h3>
-        <p>Scrub forward and backward through simulated time. Watch orbits evolve, see planets move, and trigger rare events like the T Coronae Borealis nova — all at your own pace.</p>
+        <p>Scrub forward and backward through simulated time. Watch orbits evolve, see planets move, and trigger rare events like the T Coronae Borealis nova.</p>
       </div>
       <div class="feature-card">
         <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
@@ -531,34 +677,34 @@
         <p>10 ambient tracks composed for the app. Each star system zone plays its own randomized soundtrack that loops seamlessly as you explore.</p>
       </div>
       <div class="feature-card">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 12l2 2 4-4"/></svg>
+        <h3>Eclipse Chasers</h3>
+        <p>Every total and hybrid solar eclipse from 2026 to 2051, with real path maps, verified city times, and reminder notifications.</p>
+      </div>
+      <div class="feature-card">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+        <h3>Scope Matchmaker</h3>
+        <p>Three questions, one honest telescope recommendation. No brand deals — just the setups astronomy clubs point beginners toward. See what each world looks like through real gear.</p>
+      </div>
+      <div class="feature-card">
         <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
         <h3>Sky Postcards</h3>
         <p>Capture and share screenshots of alien skies as postcards. Save them to your photo library or share directly with friends.</p>
       </div>
       <div class="feature-card">
-        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 12l2 2 4-4"/></svg>
-        <h3>Eclipse Chasers</h3>
-        <p>Every total and hybrid solar eclipse from 2026 to 2051, with real path maps, verified city times, safe-viewing gear guides, and reminder notifications.</p>
-      </div>
-      <div class="feature-card">
-        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>
         <h3>Red Night Mode</h3>
-        <p>Preserve your dark adaptation with a full red-palette night mode. Perfect for stargazing sessions — switch on and the entire UI shifts to astronomer-friendly red.</p>
+        <p>Preserve your dark adaptation with a full red-palette night mode. The entire UI shifts to astronomer-friendly red for stargazing sessions.</p>
       </div>
       <div class="feature-card">
         <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
         <h3>Other Worlds Catalog</h3>
-        <p>Browse confirmed exoplanets from the NASA archive. Filter by habitable zone, view host star data, and visit any world's sky. Data updates as new worlds are confirmed.</p>
-      </div>
-      <div class="feature-card">
-        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-        <h3>Guided Tour & Science Notes</h3>
-        <p>A first-run guided tour introduces the controls. "About the Science" screen explains the data sources. "For nerds" expanders on body profiles show raw astrophysical data.</p>
+        <p>Browse confirmed exoplanets from the NASA archive. Filter by habitable zone, view host star data, and visit any world's sky.</p>
       </div>
       <div class="feature-card">
         <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
         <h3>Battery & Accessibility</h3>
-        <p>Battery saver mode pauses background rendering and drops to 30fps. Offline-first caching. Reduced motion for warp effects. Dynamic Type support up to 1.4× scale.</p>
+        <p>Battery saver mode, offline-first caching, reduced motion for warp effects, Dynamic Type support, and softer haptics option.</p>
       </div>
     </div>
   </section>
@@ -582,154 +728,42 @@
 
     <div class="system-group-label">The Ten Nearest Star Systems (4–10 ly)</div>
     <div class="systems-grid">
-      <div class="system-card">
-        <div class="system-name">Alpha Centauri</div>
-        <div class="system-distance">4.37 ly</div>
-        <div class="system-desc">Triple star system. Proxima b orbits in the habitable zone. A and B orbit each other every 80 years.</div>
-      </div>
-      <div class="system-card">
-        <div class="system-name">Barnard's Star</div>
-        <div class="system-distance">5.96 ly</div>
-        <div class="system-desc">The fastest-moving star in our sky, now known to host four tiny rocky worlds confirmed in 2024–2025.</div>
-      </div>
-      <div class="system-card">
-        <div class="system-name">Luhman 16</div>
-        <div class="system-distance">6.5 ly</div>
-        <div class="system-desc">Binary brown dwarfs — failed stars discovered only in 2013. Luhman 16 B has mapped weather: patchy silicate clouds.</div>
-      </div>
-      <div class="system-card">
-        <div class="system-name">WISE 0855−0714</div>
-        <div class="system-distance">7.43 ly</div>
-        <div class="system-desc">The coldest known object of its kind. Surface temperature ~250 K (−23 °C), with evidence of water-ice clouds.</div>
-      </div>
-      <div class="system-card">
-        <div class="system-name">Wolf 359</div>
-        <div class="system-distance">7.86 ly</div>
-        <div class="system-desc">A tiny, violent flare star. Only 11% the Sun's mass, near the minimum for a true star. One planet candidate.</div>
-      </div>
-      <div class="system-card">
-        <div class="system-name">Lalande 21185</div>
-        <div class="system-distance">8.31 ly</div>
-        <div class="system-desc">The brightest red dwarf in the northern sky, with a confirmed rocky super-Earth and a cold Neptune-mass world.</div>
-      </div>
-      <div class="system-card">
-        <div class="system-name">Sirius</div>
-        <div class="system-distance">8.66 ly</div>
-        <div class="system-desc">The brightest star in Earth's night sky. Sirius B packs the Sun's mass into an Earth-sized sphere.</div>
-      </div>
-      <div class="system-card">
-        <div class="system-name">Luyten 726-8</div>
-        <div class="system-distance">8.79 ly</div>
-        <div class="system-desc">Home of UV Ceti, the star so twitchy it named an entire class of flare stars. Once brightened by ~75× in minutes.</div>
-      </div>
-      <div class="system-card">
-        <div class="system-name">Ross 154</div>
-        <div class="system-distance">9.71 ly</div>
-        <div class="system-desc">A young, active red dwarf that flares roughly once every two days. Probably under a billion years old.</div>
-      </div>
-      <div class="system-card">
-        <div class="system-name">Ross 248</div>
-        <div class="system-distance">10.3 ly</div>
-        <div class="system-desc">In ~36,000 years, this star will briefly become the closest to our Sun. Voyager 2 will pass within 1.7 ly of it.</div>
-      </div>
+      <div class="system-card"><div class="system-name">Alpha Centauri</div><div class="system-distance">4.37 ly</div><div class="system-desc">Triple star system. Proxima b orbits in the habitable zone. A and B orbit each other every 80 years.</div></div>
+      <div class="system-card"><div class="system-name">Barnard's Star</div><div class="system-distance">5.96 ly</div><div class="system-desc">The fastest-moving star in our sky, hosting four tiny rocky worlds confirmed in 2024–2025.</div></div>
+      <div class="system-card"><div class="system-name">Luhman 16</div><div class="system-distance">6.5 ly</div><div class="system-desc">Binary brown dwarfs discovered in 2013. Luhman 16 B has mapped weather: patchy silicate clouds.</div></div>
+      <div class="system-card"><div class="system-name">WISE 0855−0714</div><div class="system-distance">7.43 ly</div><div class="system-desc">The coldest known object of its kind. Surface temperature ~250 K, with evidence of water-ice clouds.</div></div>
+      <div class="system-card"><div class="system-name">Wolf 359</div><div class="system-distance">7.86 ly</div><div class="system-desc">A tiny, violent flare star. Only 11% the Sun's mass, near the minimum for a true star.</div></div>
+      <div class="system-card"><div class="system-name">Lalande 21185</div><div class="system-distance">8.31 ly</div><div class="system-desc">The brightest red dwarf in the northern sky, with a confirmed rocky super-Earth.</div></div>
+      <div class="system-card"><div class="system-name">Sirius</div><div class="system-distance">8.66 ly</div><div class="system-desc">The brightest star in Earth's night sky. Sirius B packs the Sun's mass into an Earth-sized sphere.</div></div>
+      <div class="system-card"><div class="system-name">Luyten 726-8</div><div class="system-distance">8.79 ly</div><div class="system-desc">Home of UV Ceti — the star so twitchy it named an entire class of flare stars.</div></div>
+      <div class="system-card"><div class="system-name">Ross 154</div><div class="system-distance">9.71 ly</div><div class="system-desc">A young, active red dwarf that flares roughly once every two days.</div></div>
+      <div class="system-card"><div class="system-name">Ross 248</div><div class="system-distance">10.3 ly</div><div class="system-desc">In ~36,000 years, this star will briefly become the closest to our Sun.</div></div>
     </div>
 
     <div class="system-group-label">Extended Neighborhood (11–49 ly)</div>
     <div class="systems-grid">
-      <div class="system-card">
-        <div class="system-name">Ross 128</div>
-        <div class="system-distance">11.0 ly</div>
-        <div class="system-desc">One of the quietest red dwarfs nearby, hosting a temperate Earth-mass world (Ross 128 b).</div>
-      </div>
-      <div class="system-card">
-        <div class="system-name">Tau Ceti</div>
-        <div class="system-distance">11.9 ly</div>
-        <div class="system-desc">The nearest lone Sun-like star. Four candidate super-Earths, two near the habitable zone. A vast debris disk.</div>
-      </div>
-      <div class="system-card">
-        <div class="system-name">Teegarden's Star</div>
-        <div class="system-distance">12.5 ly</div>
-        <div class="system-desc">An ancient red dwarf whose planets b and c are among the most Earth-like ever found. Overlooked until 2003.</div>
-      </div>
-      <div class="system-card">
-        <div class="system-name">40 Eridani</div>
-        <div class="system-distance">16.3 ly</div>
-        <div class="system-desc">A triple star of three very different suns. Famous in fiction as the home of Vulcan. The most easily observed white dwarf.</div>
-      </div>
-      <div class="system-card">
-        <div class="system-name">GJ 667 C</div>
-        <div class="system-distance">23.6 ly</div>
-        <div class="system-desc">A red dwarf in a triple system with a confirmed super-Earth in its habitable zone. Two companion stars shine brighter than our Moon.</div>
-      </div>
-      <div class="system-card">
-        <div class="system-name">TRAPPIST-1</div>
-        <div class="system-distance">40.7 ly</div>
-        <div class="system-desc">Seven Earth-sized worlds around a single tiny star. Three in the habitable zone. From one, neighbors loom larger than our Moon.</div>
-      </div>
-      <div class="system-card">
-        <div class="system-name">LHS 1140</div>
-        <div class="system-distance">48.9 ly</div>
-        <div class="system-desc">A transiting habitable-zone super-Earth that may be a water world. A prime JWST target for atmosphere searches.</div>
-      </div>
+      <div class="system-card"><div class="system-name">Ross 128</div><div class="system-distance">11.0 ly</div><div class="system-desc">One of the quietest red dwarfs nearby, hosting a temperate Earth-mass world.</div></div>
+      <div class="system-card"><div class="system-name">Tau Ceti</div><div class="system-distance">11.9 ly</div><div class="system-desc">The nearest lone Sun-like star. Four candidate super-Earths, two near the habitable zone.</div></div>
+      <div class="system-card"><div class="system-name">Teegarden's Star</div><div class="system-distance">12.5 ly</div><div class="system-desc">An ancient red dwarf whose planets b and c are among the most Earth-like ever found.</div></div>
+      <div class="system-card"><div class="system-name">40 Eridani</div><div class="system-distance">16.3 ly</div><div class="system-desc">A triple star of three very different suns. Famous in fiction as the home of Vulcan.</div></div>
+      <div class="system-card"><div class="system-name">GJ 667 C</div><div class="system-distance">23.6 ly</div><div class="system-desc">A red dwarf in a triple system with a confirmed super-Earth in its habitable zone.</div></div>
+      <div class="system-card"><div class="system-name">TRAPPIST-1</div><div class="system-distance">40.7 ly</div><div class="system-desc">Seven Earth-sized worlds around a single tiny star. Three in the habitable zone.</div></div>
+      <div class="system-card"><div class="system-name">LHS 1140</div><div class="system-distance">48.9 ly</div><div class="system-desc">A transiting habitable-zone super-Earth that may be a water world. A prime JWST target.</div></div>
     </div>
 
     <div class="system-group-label">Deep Sky — Landmark Systems (100–2,940 ly)</div>
     <div class="systems-grid">
-      <div class="system-card">
-        <div class="system-name">TOI-700</div>
-        <div class="system-distance">101 ly</div>
-        <div class="system-desc">A quiet red dwarf hosting two Earth-size worlds in its habitable zone. TESS's first such discovery.</div>
-      </div>
-      <div class="system-card">
-        <div class="system-name">K2-18</div>
-        <div class="system-distance">124 ly</div>
-        <div class="system-desc">Center of the 'hycean world' debate. JWST detected methane and CO2 in 2023, plus a contested biosignature hint.</div>
-      </div>
-      <div class="system-card">
-        <div class="system-name">Polaris</div>
-        <div class="system-distance">433 ly</div>
-        <div class="system-desc">The North Star. A pulsating Cepheid supergiant in a triple system, pulsing every ~4 days.</div>
-      </div>
-      <div class="system-card">
-        <div class="system-name">Betelgeuse</div>
-        <div class="system-distance">498 ly</div>
-        <div class="system-desc">The doomed red supergiant on Orion's shoulder. ~764× the Sun's radius. Fated to explode as a supernova.</div>
-      </div>
-      <div class="system-card">
-        <div class="system-name">Kepler-186</div>
-        <div class="system-distance">580 ly</div>
-        <div class="system-desc">Home of Kepler-186f — the first Earth-size planet discovered in a star's habitable zone (2014).</div>
-      </div>
-      <div class="system-card">
-        <div class="system-name">Mintaka</div>
-        <div class="system-distance">692 ly</div>
-        <div class="system-desc">Orion's Belt (west). A massive multiple system with an eclipsing binary at its heart. Rises almost exactly due east everywhere on Earth.</div>
-      </div>
-      <div class="system-card">
-        <div class="system-name">Alnitak</div>
-        <div class="system-distance">736 ly</div>
-        <div class="system-desc">Orion's Belt (east). The brightest O-type star visible from Earth. Its UV light sets the Flame Nebula aglow.</div>
-      </div>
-      <div class="system-card">
-        <div class="system-name">Kepler-442</div>
-        <div class="system-distance">1,206 ly</div>
-        <div class="system-desc">An orange dwarf hosting Kepler-442b — one of the most promising habitable-zone super-Earths known.</div>
-      </div>
-      <div class="system-card">
-        <div class="system-name">Kepler-452</div>
-        <div class="system-distance">1,800 ly</div>
-        <div class="system-desc">A Sun-like star famed for 'Earth's cousin' Kepler-452b — the first near-Earth-size planet around a G-type star.</div>
-      </div>
-      <div class="system-card">
-        <div class="system-name">Alnilam</div>
-        <div class="system-distance">1,977 ly</div>
-        <div class="system-desc">Orion's Belt (center). A lone blue supergiant, 300,000–500,000× the Sun's luminosity.</div>
-      </div>
-      <div class="system-card">
-        <div class="system-name">T Coronae Borealis</div>
-        <div class="system-distance">2,940 ly</div>
-        <div class="system-desc">The 'Blaze Star' — a recurrent nova expected to erupt any year now. Last exploded in 1946. Visible to the naked eye for a week.</div>
-      </div>
+      <div class="system-card"><div class="system-name">TOI-700</div><div class="system-distance">101 ly</div><div class="system-desc">A quiet red dwarf hosting two Earth-size worlds in its habitable zone.</div></div>
+      <div class="system-card"><div class="system-name">K2-18</div><div class="system-distance">124 ly</div><div class="system-desc">Center of the 'hycean world' debate. JWST detected methane and CO2 in 2023.</div></div>
+      <div class="system-card"><div class="system-name">Polaris</div><div class="system-distance">433 ly</div><div class="system-desc">The North Star. A pulsating Cepheid supergiant in a triple system.</div></div>
+      <div class="system-card"><div class="system-name">Betelgeuse</div><div class="system-distance">498 ly</div><div class="system-desc">The doomed red supergiant on Orion's shoulder. ~764× the Sun's radius.</div></div>
+      <div class="system-card"><div class="system-name">Kepler-186</div><div class="system-distance">580 ly</div><div class="system-desc">Home of Kepler-186f — the first Earth-size planet in a star's habitable zone.</div></div>
+      <div class="system-card"><div class="system-name">Mintaka</div><div class="system-distance">692 ly</div><div class="system-desc">Orion's Belt (west). A massive multiple system with an eclipsing binary at its heart.</div></div>
+      <div class="system-card"><div class="system-name">Alnitak</div><div class="system-distance">736 ly</div><div class="system-desc">Orion's Belt (east). The brightest O-type star visible from Earth.</div></div>
+      <div class="system-card"><div class="system-name">Kepler-442</div><div class="system-distance">1,206 ly</div><div class="system-desc">An orange dwarf hosting one of the most promising habitable-zone super-Earths.</div></div>
+      <div class="system-card"><div class="system-name">Kepler-452</div><div class="system-distance">1,800 ly</div><div class="system-desc">A Sun-like star famed for 'Earth's cousin' Kepler-452b.</div></div>
+      <div class="system-card"><div class="system-name">Alnilam</div><div class="system-distance">1,977 ly</div><div class="system-desc">Orion's Belt (center). A lone blue supergiant, 300,000–500,000× the Sun's luminosity.</div></div>
+      <div class="system-card"><div class="system-name">T Coronae Borealis</div><div class="system-distance">2,940 ly</div><div class="system-desc">The 'Blaze Star' — a recurrent nova expected to erupt any year now.</div></div>
     </div>
   </section>
 
@@ -751,9 +785,8 @@
         <li><span class="check">✓</span> Exoplanet catalog with habitable-zone filters</li>
         <li><span class="check">✓</span> Eclipse chaser with reminders (2026–2051)</li>
         <li><span class="check">✓</span> Original 10-track ambient soundtrack</li>
-        <li><span class="check">✓</span> Sky postcards and sharing</li>
+        <li><span class="check">✓</span> Scope Matchmaker telescope guide</li>
         <li><span class="check">✓</span> Red night mode for stargazing</li>
-        <li><span class="check">✓</span> Guided tour and science notes</li>
         <li><span class="check">✓</span> Free data updates as new worlds are confirmed</li>
         <li><span class="check">✓</span> No ads. No subscriptions. No tracking. Ever.</li>
       </ul>
@@ -785,7 +818,7 @@
           }
         });
       }, { threshold: 0.1 });
-      document.querySelectorAll('.feature-card, .system-card, .showcase, .pricing-card').forEach(el => {
+      document.querySelectorAll('.feature-card, .system-card, .showcase, .pricing-card, .screenshot-item').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(20px)';
         el.style.transition = 'opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1), transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
